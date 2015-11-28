@@ -47,7 +47,6 @@ public class PhotoFiltersActivity extends BaseActivity implements FilterImageAda
         }
 
         imageUri = "/sdcard/image.jpg";
-        Picasso.with(getContext()).load(new File(imageUri)).fit().centerCrop().into(imageView);
 
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
 
