@@ -96,6 +96,8 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
                     } catch (IOException e) {
                         Toast.makeText(GalleryActivity.this.getContext(), "Can't create image from camera... ", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    EditPhotoActivity_.intent(GalleryActivity.this).start();
                 }
             }
         });
