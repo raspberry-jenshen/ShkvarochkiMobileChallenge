@@ -28,7 +28,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-    </activity>
-</application>
+        </activity>
 
-    </manifest>
+        <activity android:name=".ui.screens.EditPhotoActivity_" />
+    </application>
+
+</manifest>
