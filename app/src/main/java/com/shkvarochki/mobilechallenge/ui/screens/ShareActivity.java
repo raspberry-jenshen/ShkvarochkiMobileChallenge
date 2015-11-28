@@ -34,6 +34,7 @@ public class ShareActivity extends BaseActivity {
     protected void afterViews() {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         if (actionBar != null) {
             actionBar.setTitle(R.string.share_title);
