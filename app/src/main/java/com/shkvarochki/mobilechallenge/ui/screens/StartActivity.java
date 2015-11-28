@@ -22,6 +22,7 @@ import java.io.IOException;
 public class StartActivity extends BaseActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+
     @InstanceState
     protected Uri contentUri;
 

@@ -53,18 +53,11 @@ public class ShareActivity extends BaseActivity {
     protected void shareClicked() {
         Intent share = new Intent(Intent.ACTION_SEND);
 
-        // If you want to share a png image only, you can do:
-        // setType("image/png"); OR for jpeg: setType("image/jpeg");
-        share.setType("image/*");
-
-        // Make sure you put example png image named myImage.png in your
-        // directory
+        share.setType("image/jpeg");
 
         File imageFileToShare = new File(imageUri);
 
-        Uri uri = Uri.fromFile(imageFileToShare);
-
-        share.putExtra(Intent.EXTRA_STREAM, uri);
+        share.putExtra(Intent.EXTRA_STREAM, imageFileToShare);
 
         startActivity(Intent.createChooser(share, "Share Image!"));
     }

@@ -85,14 +85,7 @@ public class EditPhotoActivity extends BaseActivity {
 
     @Click(R.id.rotateLeft)
     protected void rotateLeftClicked() {
-        rotated--;
-        cropImageView.setRotation(rotated);
-    }
-
-    @Click(R.id.rotateRight)
-    protected void rotateRightClicked() {
-        rotated++;
-        cropImageView.setRotation(rotated);
+        cropImageView.rotateImage(CropImageView.RotateDegrees.ROTATE_90D);
     }
 
     @OptionsItem(R.id.action_forward)
