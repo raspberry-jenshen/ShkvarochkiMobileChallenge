@@ -99,7 +99,6 @@ public class EditPhotoActivity extends BaseActivity {
     protected void forwardClicked() {
         Bitmap bitmap = cropImageView.getCroppedBitmap();
         Uri uri = BitmapUtils.getImageUri(getContext(), bitmap);
-
         PhotoFiltersActivity_.intent(getContext()).imageUri(uri.toString()).start();
     }
 }

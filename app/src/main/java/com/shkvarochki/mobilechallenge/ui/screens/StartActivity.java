@@ -23,7 +23,7 @@ public class StartActivity extends BaseActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     @InstanceState
-    private Uri contentUri;
+    protected Uri contentUri;
 
     @Click(R.id.openCamera_button)
     protected void onOpenCamera_click() {
@@ -35,7 +35,7 @@ public class StartActivity extends BaseActivity {
             startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(getContext(), "Can't create file", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Can't create a file", Toast.LENGTH_LONG).show();
         }
     }
 
