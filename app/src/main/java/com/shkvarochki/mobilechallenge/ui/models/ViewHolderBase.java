@@ -10,9 +10,6 @@ import com.shkvarochki.mobilechallenge.R;
 import com.shkvarochki.mobilechallenge.data.entities.PhotoItem;
 import com.squareup.picasso.Picasso;
 
-/**
- * Created by Евгений on 28.11.2015.
- */
 public class ViewHolderBase extends RecyclerView.ViewHolder {
     private Context context;
     private View itemView;
