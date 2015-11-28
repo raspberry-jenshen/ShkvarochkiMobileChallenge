@@ -32,9 +32,6 @@ public class PhotoFiltersActivity extends BaseActivity implements FilterImageAda
     @ViewById
     protected RecyclerView recyclerView;
 
-    @ViewById
-    protected ImageView imageView;
-
     @AfterViews
     protected void afterViews() {
         setSupportActionBar(toolbar);
@@ -57,6 +54,5 @@ public class PhotoFiltersActivity extends BaseActivity implements FilterImageAda
 
     @Override
     public void onClick(Transformation transformation) {
-        Picasso.with(getContext()).load(new File(imageUri)).transform(transformation).fit().centerCrop().into(imageView);
     }
 }

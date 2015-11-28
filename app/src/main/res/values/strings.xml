@@ -11,5 +11,6 @@
 
     <!-- Edit Photo Activity -->
     <string name="photo_filters_title">Photo filters</string>
+    <string name="photo_edit_title">Edit photo</string>
     <string name="filters">Filters:</string>
 </resources>
