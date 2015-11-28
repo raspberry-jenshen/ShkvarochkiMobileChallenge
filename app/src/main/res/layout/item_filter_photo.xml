@@ -11,4 +11,14 @@
         android:layout_height="match_parent"
         tools:adjustViewBounds="true" />
 
+    <TextView
+        android:id="@+id/filterName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/opacity_white"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        tools:text="TEST" />
+
 </com.shkvarochki.mobilechallenge.ui.components.SquareLayoutView>

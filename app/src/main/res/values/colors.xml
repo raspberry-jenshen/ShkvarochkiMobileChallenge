@@ -5,4 +5,6 @@
     <color name="colorAccent">#D84315</color>
     <color name="colorAccentWithOpacity">#10D84315</color>
     <color name="primary_text_default_material_light">#ffffff</color>
+
+    <color name="opacity_white">#40FFFFFF</color>
 </resources>
