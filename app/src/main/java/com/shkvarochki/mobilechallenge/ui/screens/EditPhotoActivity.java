@@ -40,8 +40,6 @@ public class EditPhotoActivity extends BaseActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        imageUri = "/sdcard/image.jpg";
-
         Picasso.with(getContext()).load(new File(imageUri)).fit().centerCrop().into(cropImageView);
     }
 
