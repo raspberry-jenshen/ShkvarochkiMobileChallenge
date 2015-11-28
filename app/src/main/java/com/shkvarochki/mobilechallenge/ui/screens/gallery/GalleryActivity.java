@@ -50,15 +50,18 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
     protected void afterViews() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        LinearLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        LinearLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 3);
         RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(itemAnimator);
         recyclerView.addOnItemTouchListener(new RecyclerClickListener(this) {
             @Override
             public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
+                if (position == 1) {
 
-               //// TODO: 28.11.2015
+                } else {
+
+                }
             }
         });
 
@@ -88,17 +91,15 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
         int idColumnIndex = data.getColumnIndex(MediaStore.Images.ImageColumns._ID);
         List<PhotoItem> photoList = new ArrayList<>();
         PhotoItem photoItemUrl;
-        recyclerViewAdapter.items.clear();
-        recyclerViewAdapter.items.add(addPhotoFromCameraItem);
+        photoList.add(addPhotoFromCameraItem);
         while (data.moveToNext()) {
             int id = data.getInt(idColumnIndex);
             Uri uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, String.valueOf(id));
-
             photoItemUrl = new PhotoItem(uri.toString());
             photoList.add(photoItemUrl);
         }
 
-        if (photoList.isEmpty()) {
+        if (photoList.size() == 1) {
             uiStateController.setUiStateEmpty();
             recyclerViewAdapter.setData(null);
         } else {
