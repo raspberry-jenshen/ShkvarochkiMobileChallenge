@@ -17,12 +17,13 @@ import java.util.List;
 public class FilterImageAdapter extends RecyclerView.Adapter<FilterImageAdapter.ViewHolder> {
 
     private final Context context;
-
     private final List<Transformation> transformationList;
     private final String photoUri;
+    private final OnItemClickListener onItemClickListener;
 
-    public FilterImageAdapter(Context context, List<Transformation> transformationList, String photoUri) {
+    public FilterImageAdapter(Context context, OnItemClickListener onItemClickListener, String photoUri, List<Transformation> transformationList) {
         this.context = context;
+        this.onItemClickListener = onItemClickListener;
         this.transformationList = transformationList;
         this.photoUri = photoUri;
     }
@@ -36,7 +37,11 @@ public class FilterImageAdapter extends RecyclerView.Adapter<FilterImageAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Transformation transformation = transformationList.get(position);
-
+        holder.setOnClickListener(v -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onClick(transformation);
+            }
+        });
         Picasso.with(context).load(new File(photoUri)).fit().centerCrop().transform(transformation).into(holder.photo_imageView);
     }
 
@@ -45,14 +50,28 @@ public class FilterImageAdapter extends RecyclerView.Adapter<FilterImageAdapter.
         return transformationList.size();
     }
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView photo_imageView;
+        private View.OnClickListener onClickListener;
 
         public ViewHolder(View itemView) {
             super(itemView);
             photo_imageView = (ImageView) itemView.findViewById(R.id.photo_imageView);
+            itemView.setOnClickListener(this);
         }
+
+        public void setOnClickListener(View.OnClickListener onClickListener) {
+            this.onClickListener = onClickListener;
+        }
+
+        @Override
+        public void onClick(View v) {
+            onClickListener.onClick(v);
+        }
+    }
+
+    public interface OnItemClickListener {
+        void onClick(Transformation transformation);
     }
 }

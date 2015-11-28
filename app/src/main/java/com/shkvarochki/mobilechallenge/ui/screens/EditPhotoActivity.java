@@ -11,6 +11,7 @@ import com.shkvarochki.mobilechallenge.ui.BaseActivity;
 import com.shkvarochki.mobilechallenge.ui.adapters.FilterImageAdapter;
 import com.shkvarochki.mobilechallenge.utils.FilterHelper;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -20,7 +21,7 @@ import org.androidannotations.annotations.ViewById;
 import java.io.File;
 
 @EActivity(R.layout.activity_edit_photo)
-public class EditPhotoActivity extends BaseActivity {
+public class EditPhotoActivity extends BaseActivity implements FilterImageAdapter.OnItemClickListener {
 
     @Extra
     protected String imageUri;
@@ -33,7 +34,6 @@ public class EditPhotoActivity extends BaseActivity {
 
     @ViewById
     protected ImageView imageView;
-
 
     @AfterViews
     protected void afterViews() {
@@ -51,8 +51,13 @@ public class EditPhotoActivity extends BaseActivity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
-        FilterImageAdapter adapter = new FilterImageAdapter(getContext(), FilterHelper.getSupportedTransformationList(getContext()), imageUri);
+        FilterImageAdapter adapter = new FilterImageAdapter(getContext(), this, imageUri, FilterHelper.getSupportedTransformationList(getContext()));
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClick(Transformation transformation) {
+        Picasso.with(getContext()).load(new File(imageUri)).transform(transformation).fit().centerCrop().into(imageView);
     }
 }
