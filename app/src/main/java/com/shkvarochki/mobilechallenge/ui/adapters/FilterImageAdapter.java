@@ -11,7 +11,6 @@ import com.shkvarochki.mobilechallenge.R;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
-import java.io.File;
 import java.util.List;
 
 public class FilterImageAdapter extends RecyclerView.Adapter<FilterImageAdapter.ViewHolder> {
@@ -42,7 +41,7 @@ public class FilterImageAdapter extends RecyclerView.Adapter<FilterImageAdapter.
                 onItemClickListener.onClick(transformation);
             }
         });
-        Picasso.with(context).load(new File(photoUri)).fit().centerCrop().transform(transformation).into(holder.photo_imageView);
+        Picasso.with(context).load(photoUri).fit().centerCrop().transform(transformation).into(holder.photo_imageView);
     }
 
     @Override

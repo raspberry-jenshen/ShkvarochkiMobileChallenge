@@ -39,7 +39,6 @@ public class PhotoFiltersActivity extends BaseActivity implements FilterImageAda
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
         }
-
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
 
         FilterImageAdapter adapter = new FilterImageAdapter(getContext(), this, imageUri, FilterHelper.getSupportedTransformationList(getContext()));
