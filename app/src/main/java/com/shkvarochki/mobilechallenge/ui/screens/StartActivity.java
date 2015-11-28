@@ -48,7 +48,7 @@ public class StartActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            EditPhotoActivity_.intent(this).imageUri(outputFileUri.toString()).start();
+            EditPhotoActivity_.intent(this).imageUri(outputFileUri.toString()).isFromCamera(true).start();
         }
     }
 
@@ -77,23 +77,6 @@ public class StartActivity extends BaseActivity {
 
         } catch (IOException e) {
             Toast.makeText(StartActivity.this.getContext(), "Can't create image from camera... ", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public String getPath(Context context, Uri uri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = null;
-        try {
-            cursor = context.getContentResolver().query(uri, projection, null, null, null);
-            if (cursor == null)
-                return null;
-            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            if (!cursor.moveToFirst())
-                return null;
-            return cursor.getString(columnIndex);
-        } finally {
-            if (cursor != null)
-                cursor.close();
         }
     }
 }

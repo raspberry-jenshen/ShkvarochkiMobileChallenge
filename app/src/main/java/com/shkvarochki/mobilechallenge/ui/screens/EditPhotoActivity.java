@@ -10,6 +10,7 @@ import com.shkvarochki.mobilechallenge.R;
 import com.shkvarochki.mobilechallenge.ui.BaseActivity;
 import com.shkvarochki.mobilechallenge.utils.BitmapUtils;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -29,11 +30,16 @@ public class EditPhotoActivity extends BaseActivity {
     @Extra
     protected String imageUri;
 
+    @Extra
+    protected boolean isFromCamera;
+
     @ViewById
     protected CropImageView cropImageView;
 
     @ViewById
     protected Toolbar toolbar;
+    @InstanceState
+    protected float rotated;
 
     @AfterViews
     protected void afterViews() {
@@ -47,7 +53,13 @@ public class EditPhotoActivity extends BaseActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
         }
 
-        Picasso.with(getContext()).load(imageUri).fit().centerCrop().into(cropImageView);
+        RequestCreator creator;
+        if (isFromCamera) {
+            creator = Picasso.with(getContext()).load(new File(imageUri));
+        } else {
+            creator = Picasso.with(getContext()).load(imageUri);
+        }
+        creator.fit().centerCrop().into(cropImageView);
     }
 
     @Click(R.id.textView11)
@@ -74,9 +86,6 @@ public class EditPhotoActivity extends BaseActivity {
     protected void textViewFreeClicked() {
         cropImageView.setCropMode(CropImageView.CropMode.RATIO_FREE);
     }
-
-    @InstanceState
-    protected float rotated;
 
     @Click(R.id.rotateLeft)
     protected void rotateLeftClicked() {
