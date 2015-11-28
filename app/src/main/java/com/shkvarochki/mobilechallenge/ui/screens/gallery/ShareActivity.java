@@ -2,15 +2,9 @@ package com.shkvarochki.mobilechallenge.ui.screens.gallery;
 
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.provider.MediaStore;
 
 import com.shkvarochki.mobilechallenge.R;
 import com.shkvarochki.mobilechallenge.ui.BaseActivity;
-import com.shkvarochki.mobilechallenge.ui.screens.PhotoFiltersActivity_;
-import com.shkvarochki.mobilechallenge.utils.BitmapUtils;
-
 
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;

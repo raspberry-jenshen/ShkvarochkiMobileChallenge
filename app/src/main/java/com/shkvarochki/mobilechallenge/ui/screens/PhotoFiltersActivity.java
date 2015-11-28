@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.shkvarochki.mobilechallenge.R;
 import com.shkvarochki.mobilechallenge.ui.BaseActivity;
 import com.shkvarochki.mobilechallenge.ui.adapters.FilterImageAdapter;
+import com.shkvarochki.mobilechallenge.ui.screens.gallery.ShareActivity_;
 import com.shkvarochki.mobilechallenge.utils.BitmapUtils;
 import com.shkvarochki.mobilechallenge.utils.FilterHelper;
 
@@ -54,6 +55,6 @@ public class PhotoFiltersActivity extends BaseActivity implements FilterImageAda
     public void onClick(ImageView imageView) {
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
         Uri uri = BitmapUtils.getImageUri(getContext(), bitmap);
-        //Todo goto share screen
+        ShareActivity_.intent(this).imageUri(uri.toString()).start();
     }
 }
