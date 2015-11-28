@@ -90,6 +90,8 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
                         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
                         startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                     }
+                } else {
+                    EditPhotoActivity_.intent(GalleryActivity.this).start();
                 }
             }
         });
