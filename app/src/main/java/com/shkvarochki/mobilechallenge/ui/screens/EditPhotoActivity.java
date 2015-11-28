@@ -47,7 +47,7 @@ public class EditPhotoActivity extends BaseActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
         }
 
-        Picasso.with(getContext()).load(new File(imageUri)).fit().centerCrop().into(cropImageView);
+        Picasso.with(getContext()).load(imageUri).fit().centerCrop().into(cropImageView);
     }
 
     @Click(R.id.textView11)
