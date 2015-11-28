@@ -10,7 +10,6 @@ import com.shkvarochki.mobilechallenge.R;
 import com.shkvarochki.mobilechallenge.ui.BaseActivity;
 import com.shkvarochki.mobilechallenge.utils.BitmapUtils;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -21,17 +20,12 @@ import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
-import java.io.File;
-
 @EActivity(R.layout.activity_edit_photo)
 @OptionsMenu(R.menu.menu_forward)
 public class EditPhotoActivity extends BaseActivity {
 
     @Extra
     protected String imageUri;
-
-    @Extra
-    protected boolean isFromCamera;
 
     @ViewById
     protected CropImageView cropImageView;
@@ -52,15 +46,7 @@ public class EditPhotoActivity extends BaseActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
         }
-
-        RequestCreator creator;
-        if (isFromCamera) {
-            File file = new File(imageUri);
-            creator = Picasso.with(this).load(file);
-        } else {
-            creator = Picasso.with(this).load(imageUri);
-        }
-        creator.fit().centerInside().into(cropImageView);
+        Picasso.with(this).load(imageUri).fit().centerInside().into(cropImageView);
     }
 
     @Click(R.id.textView11)
