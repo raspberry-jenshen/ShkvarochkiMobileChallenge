@@ -27,6 +27,9 @@ public class EditPhotoActivity extends BaseActivity {
     @Extra
     protected String imageUri;
 
+    @Extra
+    protected boolean isFromCamera;
+
     @ViewById
     protected CropImageView cropImageView;
 
@@ -46,7 +49,13 @@ public class EditPhotoActivity extends BaseActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
         }
-        Picasso.with(this).load(imageUri).fit().centerInside().into(cropImageView);
+
+        if (isFromCamera) {
+            String imagePath = "file://".concat(imageUri);
+            Picasso.with(this).load(imagePath).fit().centerInside().into(cropImageView);
+        } else {
+            Picasso.with(this).load(imageUri).fit().centerInside().into(cropImageView);
+        }
     }
 
     @Click(R.id.textView11)
