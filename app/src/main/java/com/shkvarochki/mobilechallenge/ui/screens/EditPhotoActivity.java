@@ -87,9 +87,6 @@ public class EditPhotoActivity extends BaseActivity {
         cropImageView.setCropMode(CropImageView.CropMode.RATIO_FREE);
     }
 
-    @InstanceState
-    protected float rotated;
-
     @Click(R.id.rotateLeft)
     protected void rotateLeftClicked() {
         rotated--;
