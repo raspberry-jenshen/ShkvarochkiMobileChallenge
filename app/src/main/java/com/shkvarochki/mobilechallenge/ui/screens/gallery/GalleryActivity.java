@@ -1,8 +1,12 @@
 package com.shkvarochki.mobilechallenge.ui.screens.gallery;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -10,7 +14,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateFormat;
 import android.view.View;
+import android.widget.Toast;
 
 import com.shkvarochki.mobilechallenge.R;
 import com.shkvarochki.mobilechallenge.data.entities.PhotoItem;
@@ -25,9 +31,15 @@ import org.androidannotations.annotations.ViewById;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @EActivity(R.layout.gallery_activity)
 public class GalleryActivity extends AppCompatActivity implements IGalleryView {
 
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
     private final IGalleryPresenter presenter;
     private final PhotoItem addPhotoFromCameraItem;
     @ViewById
@@ -57,10 +69,26 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
         recyclerView.addOnItemTouchListener(new RecyclerClickListener(this) {
             @Override
             public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-                if (position == 1) {
+                if (position == 0) {
+                    final String dir =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+ "/Folder/";
+                    File newdir = new File(dir);
+                    newdir.mkdirs();
 
-                } else {
+                    String file = dir + DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString()+".jpg";
 
+                    File newfile = new File(file);
+                    try {
+                        newfile.createNewFile();
+                    } catch (IOException e) {
+                        Toast.makeText(GalleryActivity.this.getContext(), "Всё плохо... ", Toast.LENGTH_SHORT).show();
+                    }
+
+                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    Uri outputFileUri = Uri.fromFile(newfile);
+                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                    }
                 }
             }
         });
@@ -114,4 +142,14 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
         uiStateController.setUiStateError();
         recyclerViewAdapter.setData(null);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Uri imageUri = data.getData();
+            Toast.makeText(this.getContext(), "File saved to " + imageUri.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
