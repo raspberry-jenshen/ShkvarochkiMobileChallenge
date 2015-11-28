@@ -48,4 +48,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolderBase> {
     public int getItemCount() {
         return items == null ? 0 : items.size();
     }
+
+    public List<PhotoItem> getItems() {
+        return items;
+    }
 }
