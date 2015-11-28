@@ -10,6 +10,6 @@
     <string name="try_again">Try again</string>
 
     <!-- Edit Photo Activity -->
-    <string name="edit_photo_title">Edit photo</string>
+    <string name="photo_filters_title">Photo filters</string>
     <string name="filters">Filters:</string>
 </resources>

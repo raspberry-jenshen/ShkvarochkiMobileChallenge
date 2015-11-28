@@ -11,9 +11,8 @@
         android:background="@color/colorPrimary"
         android:theme="@style/Toolbar" />
 
-    <ImageView
-        android:id="@+id/imageView"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 </LinearLayout>

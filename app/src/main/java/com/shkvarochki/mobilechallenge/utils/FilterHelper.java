@@ -28,6 +28,7 @@ public class FilterHelper {
         transformationList.add(new SwirlFilterTransformation(context));
         transformationList.add(new BrightnessFilterTransformation(context));
         transformationList.add(new VignetteFilterTransformation(context));
+        transformationList.add(new VignetteFilterTransformation(context));
         return transformationList;
     }
 
