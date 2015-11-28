@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -22,6 +23,7 @@ import com.shkvarochki.mobilechallenge.data.entities.PhotoItem;
 import com.shkvarochki.mobilechallenge.listeners.RecyclerClickListener;
 import com.shkvarochki.mobilechallenge.ui.UiStateController;
 import com.shkvarochki.mobilechallenge.ui.adapters.RecyclerViewAdapter;
+import com.shkvarochki.mobilechallenge.ui.models.ViewHolderBase;
 import com.shkvarochki.mobilechallenge.ui.screens.EditPhotoActivity_;
 
 import org.androidannotations.annotations.AfterViews;
@@ -59,6 +61,15 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
     protected void afterViews() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+
+        if (actionBar != null) {
+            actionBar.setTitle(R.string.gallery_title);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
+        }
+
         LinearLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 3);
         RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
         recyclerView.setLayoutManager(layoutManager);
@@ -66,7 +77,8 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
         recyclerView.addOnItemTouchListener(new RecyclerClickListener(this) {
             @Override
             public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-
+                PhotoItem item = recyclerViewAdapter.getItems().get(position);
+                EditPhotoActivity_.intent(GalleryActivity.this).imageUri(item.getUri().get()).start();
             }
         });
 

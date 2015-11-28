@@ -1,9 +1,12 @@
 package com.shkvarochki.mobilechallenge.ui.screens;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.Toast;
@@ -67,13 +70,30 @@ public class StartActivity extends BaseActivity {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 outputFileUri = Uri.fromFile(newFile);
                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri.toString());
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 }
             }
 
         } catch (IOException e) {
             Toast.makeText(StartActivity.this.getContext(), "Can't create image from camera... ", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public String getPath(Context context, Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = null;
+        try {
+            cursor = context.getContentResolver().query(uri, projection, null, null, null);
+            if (cursor == null)
+                return null;
+            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            if (!cursor.moveToFirst())
+                return null;
+            return cursor.getString(columnIndex);
+        } finally {
+            if (cursor != null)
+                cursor.close();
         }
     }
 }
