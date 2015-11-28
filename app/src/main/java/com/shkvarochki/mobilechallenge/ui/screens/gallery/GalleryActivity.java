@@ -79,17 +79,18 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
                     try {
                         if (newDir.mkdirs()) {
                             Log.d(TAG, "Directories was created: " + newDir.toString());
-                        }
 
-                        String file = dir + DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString()+".jpg";
+                            String file = dir + DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString()+".jpg";
 
-                        File newFile = new File(file);
-                        if (newFile.createNewFile()) {
-                            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            outputFileUri = Uri.fromFile(newFile);
-                            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-                                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                            File newFile = new File(file);
+                            if (newFile.createNewFile()) {
+                                Log.d(TAG, "File was created: " + newDir.toString());
+                                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                outputFileUri = Uri.fromFile(newFile);
+                                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+                                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                                }
                             }
                         }
                     } catch (IOException e) {
