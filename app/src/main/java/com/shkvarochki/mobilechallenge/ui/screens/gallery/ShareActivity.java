@@ -35,10 +35,8 @@ public class ShareActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
 
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
-
         if (actionBar != null) {
-            actionBar.setTitle(R.string.photo_filters_title);
+            actionBar.setTitle(R.string.share_title);
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
         }
