@@ -97,6 +97,6 @@ public class PhotoFiltersActivity extends BaseActivity implements FilterImageAda
 
     public void onBitmapLoaded(Object bitmap) {
         Uri uri = BitmapUtils.getImageUri(getContext(), (Bitmap) bitmap);
-        ShareActivity_.intent(this).imageUri(uri.toString()).start();
+        ShareActivity_.intent(this).imageUri(uri).start();
     }
 }

@@ -3,7 +3,6 @@ package com.shkvarochki.mobilechallenge.ui.screens;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Environment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
@@ -19,20 +18,16 @@ import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
-import java.io.File;
-
 @EActivity(R.layout.activity_share)
 @OptionsMenu(R.menu.menu_share)
 public class ShareActivity extends BaseActivity {
 
     @Extra
-    protected String imageUri;
-
-    @ViewById
-    ImageView readyPhoto_imageView;
-
+    protected Uri imageUri;
     @ViewById
     protected Toolbar toolbar;
+    @ViewById
+    ImageView readyPhoto_imageView;
 
     @AfterViews
     protected void afterViews() {
@@ -47,19 +42,14 @@ public class ShareActivity extends BaseActivity {
         }
 
         Picasso.with(this.getContext()).load(imageUri).fit().centerCrop().into(readyPhoto_imageView);
+
     }
 
     @OptionsItem(R.id.action_share)
     protected void shareClicked() {
         Intent share = new Intent(Intent.ACTION_SEND);
-
-        share.setType("image/jpeg");
-
-        File imageFileToShare = new File(imageUri);
-
-        share.putExtra(Intent.EXTRA_STREAM, imageFileToShare);
-
+        share.setType("image/*");
+        share.putExtra(Intent.EXTRA_STREAM, imageUri);
         startActivity(Intent.createChooser(share, "Share Image!"));
     }
-
 }
