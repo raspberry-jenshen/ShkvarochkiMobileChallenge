@@ -1,4 +1,4 @@
-package com.shkvarochki.mobilechallenge.ui.screens.gallery;
+package com.shkvarochki.mobilechallenge.ui.screens;
 
 
 import android.content.Intent;
