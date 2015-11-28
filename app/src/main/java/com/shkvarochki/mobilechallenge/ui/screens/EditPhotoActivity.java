@@ -1,11 +1,14 @@
 package com.shkvarochki.mobilechallenge.ui.screens;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
 import com.isseiaoki.simplecropview.CropImageView;
 import com.shkvarochki.mobilechallenge.R;
 import com.shkvarochki.mobilechallenge.ui.BaseActivity;
+import com.shkvarochki.mobilechallenge.utils.BitmapUtils;
 import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
@@ -13,11 +16,14 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.InstanceState;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
 import java.io.File;
 
 @EActivity(R.layout.activity_edit_photo)
+@OptionsMenu(R.menu.menu_forward)
 public class EditPhotoActivity extends BaseActivity {
 
     @Extra
@@ -38,6 +44,7 @@ public class EditPhotoActivity extends BaseActivity {
         if (actionBar != null) {
             actionBar.setTitle(R.string.photo_edit_title);
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
         }
 
         Picasso.with(getContext()).load(new File(imageUri)).fit().centerCrop().into(cropImageView);
@@ -81,5 +88,13 @@ public class EditPhotoActivity extends BaseActivity {
     protected void rotateRightClicked() {
         rotated++;
         cropImageView.setRotation(rotated);
+    }
+
+    @OptionsItem(R.id.action_forward)
+    protected void forwardClicked() {
+        Bitmap bitmap = cropImageView.getCroppedBitmap();
+        Uri uri = BitmapUtils.getImageUri(getContext(), bitmap);
+
+        PhotoFiltersActivity_.intent(getContext()).imageUri(uri.toString()).start();
     }
 }

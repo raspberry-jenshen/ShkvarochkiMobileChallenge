@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">ShkvarochkiMobileChallenge</string>
     <string name="action_settings">Settings</string>
+    <string name="action_forward">Forward</string>
 
 
     <string name="data.loading">Loading photos…</string>
