@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import com.shkvarochki.mobilechallenge.R;
 import com.shkvarochki.mobilechallenge.ui.BaseActivity;
 import com.shkvarochki.mobilechallenge.ui.adapters.FilterImageAdapter;
-import com.shkvarochki.mobilechallenge.ui.screens.gallery.ShareActivity_;
 import com.shkvarochki.mobilechallenge.utils.BitmapUtils;
 import com.shkvarochki.mobilechallenge.utils.FilterHelper;
 

@@ -59,7 +59,7 @@ public class EditPhotoActivity extends BaseActivity {
         } else {
             creator = Picasso.with(getContext()).load(imageUri);
         }
-        creator.fit().centerCrop().into(cropImageView);
+        creator.fit().centerInside().into(cropImageView);
     }
 
     @Click(R.id.textView11)
@@ -86,6 +86,9 @@ public class EditPhotoActivity extends BaseActivity {
     protected void textViewFreeClicked() {
         cropImageView.setCropMode(CropImageView.CropMode.RATIO_FREE);
     }
+
+    @InstanceState
+    protected float rotated;
 
     @Click(R.id.rotateLeft)
     protected void rotateLeftClicked() {
