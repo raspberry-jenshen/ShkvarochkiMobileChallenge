@@ -36,7 +36,7 @@ public class StartActivity extends BaseActivity {
             startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(getContext(), "Can't create file", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Can't create a file", Toast.LENGTH_LONG).show();
         }
     }
 
