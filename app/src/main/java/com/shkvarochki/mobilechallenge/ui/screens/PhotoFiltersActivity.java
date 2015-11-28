@@ -1,7 +1,7 @@
 package com.shkvarochki.mobilechallenge.ui.screens;
 
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,9 +12,11 @@ import android.widget.ImageView;
 import com.shkvarochki.mobilechallenge.R;
 import com.shkvarochki.mobilechallenge.ui.BaseActivity;
 import com.shkvarochki.mobilechallenge.ui.adapters.FilterImageAdapter;
+import com.shkvarochki.mobilechallenge.ui.screens.entity.TransformationEntity;
 import com.shkvarochki.mobilechallenge.utils.BitmapUtils;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
@@ -50,9 +52,12 @@ public class PhotoFiltersActivity extends BaseActivity implements FilterImageAda
     }
 
     @Override
-    public void onClick(ImageView imageView) {
-        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-        Uri uri = BitmapUtils.getImageUri(getContext(), bitmap);
+    public void onClick(ImageView imageView, TransformationEntity transformationEntity) {
+
+    }
+
+    public void onBitmapLoaded(Object bitmap) {
+        Uri uri = BitmapUtils.getImageUri(getContext(),(Bitmap) bitmap);
         ShareActivity_.intent(this).imageUri(uri.toString()).start();
     }
 }

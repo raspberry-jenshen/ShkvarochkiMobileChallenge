@@ -50,7 +50,7 @@ public class FilterImageAdapter extends RecyclerView.Adapter<FilterImageAdapter.
         TransformationEntity transformation = transformationList.get(position);
         holder.setOnClickListener(v -> {
             if (onItemClickListener != null) {
-                onItemClickListener.onClick(holder.photo_imageView);
+                onItemClickListener.onClick(holder.photo_imageView, transformation);
             }
         });
         Picasso.with(context).load(photoUri).fit().centerCrop().transform(transformation.getTransformation()).into(holder.photo_imageView);
@@ -86,7 +86,7 @@ public class FilterImageAdapter extends RecyclerView.Adapter<FilterImageAdapter.
     }
 
     public interface OnItemClickListener {
-        void onClick(ImageView imageView);
+        void onClick(ImageView imageView, TransformationEntity transformationEntity);
     }
 
     private List<TransformationEntity> getTransformationList(Context context) {
