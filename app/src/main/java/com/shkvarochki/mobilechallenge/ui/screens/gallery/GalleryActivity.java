@@ -29,23 +29,16 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.ViewById;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-@EActivity(R.layout.gallery_activity)
+@EActivity(R.layout.activity_gallery)
 public class GalleryActivity extends AppCompatActivity implements IGalleryView {
 
-    private static final String TAG = "GalleryActivit";
-
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
     private final IGalleryPresenter presenter;
-
-    @InstanceState
-    protected Uri outputFileUri;
 
     @ViewById
     protected RecyclerView recyclerView;
@@ -73,32 +66,7 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
         recyclerView.addOnItemTouchListener(new RecyclerClickListener(this) {
             @Override
             public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-                if (position == 0) {
-                    final String dir =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+ "/Avatar/";
-                    File newDir = new File(dir);
-                    try {
-                        if (newDir.mkdirs()) {
-                            Log.d(TAG, "Directories was created: " + newDir.toString());
 
-                            String file = dir + DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString()+".jpg";
-
-                            File newFile = new File(file);
-                            if (newFile.createNewFile()) {
-                                Log.d(TAG, "File was created: " + newDir.toString());
-                                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                outputFileUri = Uri.fromFile(newFile);
-                                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-                                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                                }
-                            }
-                        }
-                    } catch (IOException e) {
-                        Toast.makeText(GalleryActivity.this.getContext(), "Can't create image from camera... ", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    EditPhotoActivity_.intent(GalleryActivity.this).start();
-                }
             }
         });
 
@@ -128,7 +96,6 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
         int idColumnIndex = data.getColumnIndex(MediaStore.Images.ImageColumns._ID);
         List<PhotoItem> photoList = new ArrayList<>();
         PhotoItem photoItemUrl;
-        photoList.add(new PhotoItem());
         while (data.moveToNext()) {
             int id = data.getInt(idColumnIndex);
             Uri uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, String.valueOf(id));
@@ -150,14 +117,6 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
     public void onLoaderReset() {
         uiStateController.setUiStateError();
         recyclerViewAdapter.setData(null);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            EditPhotoActivity_.intent(this).imageUri(outputFileUri.toString()).start();
-        }
     }
 
 }

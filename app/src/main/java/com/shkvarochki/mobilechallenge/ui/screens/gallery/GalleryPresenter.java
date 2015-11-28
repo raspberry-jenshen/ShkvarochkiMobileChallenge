@@ -19,6 +19,12 @@ public class GalleryPresenter implements IGalleryPresenter {
 
     public static final int LoaderId_Photos = 0;
     private final IGalleryView galleryView;
+
+
+    public GalleryPresenter(IGalleryView galleryView) {
+        this.galleryView = galleryView;
+    }
+
     private LoaderManager.LoaderCallbacks<Cursor> photosLoaderCallbacks = new LoaderManager.LoaderCallbacks<Cursor>() {
 
         @Override
@@ -58,9 +64,6 @@ public class GalleryPresenter implements IGalleryPresenter {
         }
     };
 
-    public GalleryPresenter(IGalleryView galleryView) {
-        this.galleryView = galleryView;
-    }
 
     /* listeners */
 
@@ -87,4 +90,6 @@ public class GalleryPresenter implements IGalleryPresenter {
                 cursor.close();
         }
     }
+
+
 }
