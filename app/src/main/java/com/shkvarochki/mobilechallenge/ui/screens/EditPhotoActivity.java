@@ -20,7 +20,7 @@ import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
-import java.io.File;
+
 
 @EActivity(R.layout.activity_edit_photo)
 @OptionsMenu(R.menu.menu_forward)
@@ -47,7 +47,7 @@ public class EditPhotoActivity extends BaseActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
         }
 
-        Picasso.with(getContext()).load(imageUri).fit().centerCrop().into(cropImageView);
+        Picasso.with(getContext()).load(imageUri).fit().centerInside().into(cropImageView);
     }
 
     @Click(R.id.textView11)
