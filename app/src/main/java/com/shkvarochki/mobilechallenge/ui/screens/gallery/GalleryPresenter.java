@@ -10,9 +10,6 @@ import android.support.v4.content.Loader;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
-/**
- * Created by Евгений on 28.11.2015.
- */
 public class GalleryPresenter implements IGalleryPresenter {
 
     public static final int LoaderId_Photos = 0;

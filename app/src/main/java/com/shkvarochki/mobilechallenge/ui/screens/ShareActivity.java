@@ -2,8 +2,6 @@ package com.shkvarochki.mobilechallenge.ui.screens;
 
 
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Environment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
@@ -52,13 +50,9 @@ public class ShareActivity extends BaseActivity {
     @OptionsItem(R.id.action_share)
     protected void shareClicked() {
         Intent share = new Intent(Intent.ACTION_SEND);
-
         share.setType("image/jpeg");
-
         File imageFileToShare = new File(imageUri);
-
         share.putExtra(Intent.EXTRA_STREAM, imageFileToShare);
-
         startActivity(Intent.createChooser(share, "Share Image!"));
     }
 

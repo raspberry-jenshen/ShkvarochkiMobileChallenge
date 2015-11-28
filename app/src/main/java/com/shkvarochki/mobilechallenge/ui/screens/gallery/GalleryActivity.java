@@ -1,10 +1,8 @@
 package com.shkvarochki.mobilechallenge.ui.screens.gallery;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,28 +11,21 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+
 
 import com.shkvarochki.mobilechallenge.R;
 import com.shkvarochki.mobilechallenge.data.entities.PhotoItem;
 import com.shkvarochki.mobilechallenge.listeners.RecyclerClickListener;
 import com.shkvarochki.mobilechallenge.ui.UiStateController;
 import com.shkvarochki.mobilechallenge.ui.adapters.RecyclerViewAdapter;
-import com.shkvarochki.mobilechallenge.ui.models.ViewHolderBase;
 import com.shkvarochki.mobilechallenge.ui.screens.EditPhotoActivity_;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.ViewById;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @EActivity(R.layout.activity_gallery)
