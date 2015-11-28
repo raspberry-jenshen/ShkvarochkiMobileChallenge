@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -37,6 +38,8 @@ import java.util.Date;
 
 @EActivity(R.layout.gallery_activity)
 public class GalleryActivity extends AppCompatActivity implements IGalleryView {
+
+    private static final String TAG = "GalleryActivit";
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private final IGalleryPresenter presenter;
@@ -71,24 +74,27 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
             @Override
             public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
                 if (position == 0) {
-                    final String dir =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+ "/Folder/";
+                    final String dir =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+ "/Avatar/";
                     File newDir = new File(dir);
-                    newDir.mkdirs();
-
-                    String file = dir + DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString()+".jpg";
-
-                    File newFile = new File(file);
                     try {
-                        newFile.createNewFile();
-                    } catch (IOException e) {
-                        Toast.makeText(GalleryActivity.this.getContext(), "Всё плохо... ", Toast.LENGTH_SHORT).show();
-                    }
+                        if (newDir.mkdirs()) {
+                            Log.d(TAG, "Directories was created: " + newDir.toString());
 
-                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    outputFileUri = Uri.fromFile(newFile);
-                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                            String file = dir + DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString()+".jpg";
+
+                            File newFile = new File(file);
+                            if (newFile.createNewFile()) {
+                                Log.d(TAG, "File was created: " + newDir.toString());
+                                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                outputFileUri = Uri.fromFile(newFile);
+                                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+                                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                                }
+                            }
+                        }
+                    } catch (IOException e) {
+                        Toast.makeText(GalleryActivity.this.getContext(), "Can't create image from camera... ", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     EditPhotoActivity_.intent(GalleryActivity.this).start();
