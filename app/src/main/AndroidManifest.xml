@@ -27,6 +27,7 @@
         </activity>
 
         <activity android:name=".ui.screens.EditPhotoActivity_">
+
     </activity>
 </application>
 
