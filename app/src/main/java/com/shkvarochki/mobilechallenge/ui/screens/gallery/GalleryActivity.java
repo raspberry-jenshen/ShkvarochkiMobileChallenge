@@ -91,7 +91,7 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
         int idColumnIndex = data.getColumnIndex(MediaStore.Images.ImageColumns._ID);
         List<PhotoItem> photoList = new ArrayList<>();
         PhotoItem photoItemUrl;
-        photoList.add(addPhotoFromCameraItem);
+        photoList.add(new PhotoItem(null));
         while (data.moveToNext()) {
             int id = data.getInt(idColumnIndex);
             Uri uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, String.valueOf(id));
