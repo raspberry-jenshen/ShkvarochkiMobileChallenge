@@ -18,4 +18,9 @@
     <!-- Gallery Activity -->
 
     <string name="gallery_title">Gallery</string>
+
+
+    <!-- Start Activity -->
+    <string name="take_picture">Take picture</string>
+    <string name="choose_from_gallery">Choose picture from gallery</string>
 </resources>
