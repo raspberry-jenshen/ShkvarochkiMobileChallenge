@@ -38,9 +38,9 @@ public class PhotoFiltersActivity extends BaseActivity implements FilterImageAda
     protected Toolbar toolbar;
     @ViewById
     protected RecyclerView recyclerView;
-    private Subscription subscription;
     @Bean
     protected ProgressDialogHelper progressDialogHelper;
+    private Subscription subscription;
 
     @Override
     protected void onDestroy() {
@@ -50,12 +50,13 @@ public class PhotoFiltersActivity extends BaseActivity implements FilterImageAda
 
     @AfterViews
     protected void afterViews() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         if (actionBar != null) {
-            actionBar.setTitle(R.string.photo_edit_title);
+            actionBar.setTitle(R.string.gallery_title);
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
         }
