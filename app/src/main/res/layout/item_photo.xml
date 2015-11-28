@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    app:cardElevation="25dp"
-    android:layout_margin="@dimen/offset_small1">
+    app:cardElevation="5dp"
+    android:layout_margin="@dimen/offset_small3">
 
     <ImageView
         android:id="@+id/photo_imageView"
