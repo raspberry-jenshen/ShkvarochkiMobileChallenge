@@ -23,5 +23,18 @@
     <!-- Start Activity -->
     <string name="take_picture">Take picture</string>
     <string name="choose_from_gallery">Choose picture from gallery</string>
+
+    <!-- Filter names -->
+    <string name="filter_none">None</string>
+    <string name="filter_toon">Toon</string>
+    <string name="filter_contrast">Contrast</string>
+    <string name="filter_invert">Invert</string>
+    <string name="filter_pixelising">Pixelising</string>
+    <string name="filter_scretch">Scretch</string>
+    <string name="filter_swirl">Swirl</string>
+    <string name="filter_brightness">Brightness</string>
+    <string name="filter_vignette">Vignette</string>
+    <string name="filter_circle">Cirlce</string>
+
     <string name="share_title">Share photo</string>
 </resources>

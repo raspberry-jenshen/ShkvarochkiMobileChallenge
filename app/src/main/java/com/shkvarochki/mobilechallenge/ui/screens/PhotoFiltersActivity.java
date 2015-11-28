@@ -13,7 +13,6 @@ import com.shkvarochki.mobilechallenge.R;
 import com.shkvarochki.mobilechallenge.ui.BaseActivity;
 import com.shkvarochki.mobilechallenge.ui.adapters.FilterImageAdapter;
 import com.shkvarochki.mobilechallenge.utils.BitmapUtils;
-import com.shkvarochki.mobilechallenge.utils.FilterHelper;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -45,7 +44,7 @@ public class PhotoFiltersActivity extends BaseActivity implements FilterImageAda
         }
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
 
-        FilterImageAdapter adapter = new FilterImageAdapter(getContext(), this, imageUri, FilterHelper.getSupportedTransformationList(getContext()));
+        FilterImageAdapter adapter = new FilterImageAdapter(getContext(), this, imageUri);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
