@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +21,9 @@ import com.shkvarochki.mobilechallenge.ui.adapters.RecyclerViewAdapter;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @EActivity(R.layout.gallery_activity)
 public class GalleryActivity extends AppCompatActivity implements IGalleryView {
@@ -46,13 +50,14 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
     protected void afterViews() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        LinearLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 2);
         RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(itemAnimator);
         recyclerView.addOnItemTouchListener(new RecyclerClickListener(this) {
             @Override
             public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
+
                //// TODO: 28.11.2015
             }
         });
@@ -80,25 +85,27 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
 
     @Override
     public void setData(Cursor data) {
-        boolean hasData = false;
         int idColumnIndex = data.getColumnIndex(MediaStore.Images.ImageColumns._ID);
+        List<PhotoItem> photoList = new ArrayList<>();
         PhotoItem photoItemUrl;
         recyclerViewAdapter.items.clear();
         recyclerViewAdapter.items.add(addPhotoFromCameraItem);
         while (data.moveToNext()) {
-            hasData = true;
             int id = data.getInt(idColumnIndex);
             Uri uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, String.valueOf(id));
+
             photoItemUrl = new PhotoItem(uri.toString());
-            recyclerViewAdapter.items.add(photoItemUrl);
+            photoList.add(photoItemUrl);
         }
-        recyclerViewAdapter.notifyDataSetChanged();
-        if (!hasData) {
+
+        if (photoList.isEmpty()) {
             uiStateController.setUiStateEmpty();
             recyclerViewAdapter.setData(null);
         } else {
             uiStateController.setUiStateContent();
+            recyclerViewAdapter.setData(photoList);
         }
+        recyclerViewAdapter.notifyDataSetChanged();
     }
 
     @Override

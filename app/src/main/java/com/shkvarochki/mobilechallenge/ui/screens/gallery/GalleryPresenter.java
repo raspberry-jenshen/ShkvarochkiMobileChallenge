@@ -70,6 +70,7 @@ public class GalleryPresenter implements IGalleryPresenter {
     }
 
     @Nullable
+    @Override
     public String getPath(Context context, Uri uri) {
         String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = null;
