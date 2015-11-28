@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.annimon.stream.Stream;
 import com.shkvarochki.mobilechallenge.R;
 import com.shkvarochki.mobilechallenge.data.entities.PhotoItem;
 import com.shkvarochki.mobilechallenge.ui.models.ViewHolderBase;
@@ -30,24 +29,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolderBase> {
             items.clear();
             return;
         }
-        Stream.of(games).filter(item -> !items.contains(item)).forEach(this::addItem);
-        Stream.of(items).filter(item -> !games.contains(item)).forEach(this::deleteItem);
-    }
-
-    private void addItem(PhotoItem tableInfo) {
-        if (items.size() > 0) {
-            items.add(0, tableInfo);
-            notifyItemInserted(0);
-        } else {
-            items.add(tableInfo);
-            notifyDataSetChanged();
-        }
-    }
-
-    private void deleteItem(PhotoItem tableInfo) {
-        int position = items.indexOf(tableInfo);
-        items.remove(tableInfo);
-        notifyItemRemoved(position);
+        this.items = games;
     }
 
     @Override

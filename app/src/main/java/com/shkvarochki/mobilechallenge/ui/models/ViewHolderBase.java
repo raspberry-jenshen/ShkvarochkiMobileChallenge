@@ -9,8 +9,6 @@ import com.shkvarochki.mobilechallenge.R;
 import com.shkvarochki.mobilechallenge.data.entities.PhotoItem;
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
-
 /**
  * Created by Евгений on 28.11.2015.
  */
@@ -29,10 +27,16 @@ public class ViewHolderBase extends RecyclerView.ViewHolder {
     public void setInfo(PhotoItem info) {
         this.info = info;
         ImageView photo_imageView = (ImageView) itemView.findViewById(R.id.photo_imageView);
-        Picasso.with(context)
-                .load(info.getUri())
-                .fit()
-                .centerCrop()
-                .into(photo_imageView);
+
+        String uri = info.getUri();
+        if (uri == null) {
+            photo_imageView.setImageResource(R.drawable.ic_camera_alt_black_24dp);
+        } else {
+            Picasso.with(context)
+                    .load(uri)
+                    .fit()
+                    .centerCrop()
+                    .into(photo_imageView);
+        }
     }
 }
