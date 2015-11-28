@@ -41,7 +41,6 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private final IGalleryPresenter presenter;
-    private final PhotoItem addPhotoFromCameraItem;
     @ViewById
     protected RecyclerView recyclerView;
     @ViewById
@@ -55,7 +54,6 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
 
     public GalleryActivity() {
         presenter = new GalleryPresenter(this);
-        addPhotoFromCameraItem = new PhotoItem(null);
     }
 
     @AfterViews
@@ -119,7 +117,7 @@ public class GalleryActivity extends AppCompatActivity implements IGalleryView {
         int idColumnIndex = data.getColumnIndex(MediaStore.Images.ImageColumns._ID);
         List<PhotoItem> photoList = new ArrayList<>();
         PhotoItem photoItemUrl;
-        photoList.add(new PhotoItem(null));
+        photoList.add(new PhotoItem());
         while (data.moveToNext()) {
             int id = data.getInt(idColumnIndex);
             Uri uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, String.valueOf(id));
