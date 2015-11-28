@@ -37,4 +37,10 @@
     <string name="filter_circle">Cirlce</string>
 
     <string name="share_title">Share photo</string>
+
+
+    <string name="Processing">Processing</string>
+    <string name="WaitC_pleaseD3">Wait, please…</string>
+
+    <string name="Cancel">Cancel</string>
 </resources>

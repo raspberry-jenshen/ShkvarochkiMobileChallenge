@@ -55,9 +55,10 @@ public class EditPhotoActivity extends BaseActivity {
 
         RequestCreator creator;
         if (isFromCamera) {
-            creator = Picasso.with(getContext()).load(new File(imageUri));
+            File file = new File(imageUri);
+            creator = Picasso.with(this).load(file);
         } else {
-            creator = Picasso.with(getContext()).load(imageUri);
+            creator = Picasso.with(this).load(imageUri);
         }
         creator.fit().centerInside().into(cropImageView);
     }
