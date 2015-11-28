@@ -9,6 +9,11 @@
     app:cardElevation="5dp"
     android:layout_margin="@dimen/offset_small3">
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateOnly="true"/>
     <ImageView
         android:id="@+id/photo_imageView"
         android:layout_width="match_parent"
