@@ -24,12 +24,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolderBase> {
         this.context = context;
     }
 
-    public void setData(List<PhotoItem> games) {
-        if (games == null) {
-            items.clear();
+    public void setData(List<PhotoItem> items) {
+        if (items == null) {
+            this.items.clear();
             return;
         }
-        this.items = games;
+        this.items = items;
     }
 
     @Override
