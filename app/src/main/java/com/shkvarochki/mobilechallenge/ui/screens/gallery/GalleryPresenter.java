@@ -1,11 +1,9 @@
 package com.shkvarochki.mobilechallenge.ui.screens.gallery;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -19,12 +17,6 @@ public class GalleryPresenter implements IGalleryPresenter {
 
     public static final int LoaderId_Photos = 0;
     private final IGalleryView galleryView;
-
-
-    public GalleryPresenter(IGalleryView galleryView) {
-        this.galleryView = galleryView;
-    }
-
     private LoaderManager.LoaderCallbacks<Cursor> photosLoaderCallbacks = new LoaderManager.LoaderCallbacks<Cursor>() {
 
         @Override
@@ -64,6 +56,10 @@ public class GalleryPresenter implements IGalleryPresenter {
         }
     };
 
+    public GalleryPresenter(IGalleryView galleryView) {
+        this.galleryView = galleryView;
+    }
+
 
     /* listeners */
 
@@ -71,25 +67,4 @@ public class GalleryPresenter implements IGalleryPresenter {
     public void initLoaders() {
         galleryView.getSupportLoaderManager().initLoader(LoaderId_Photos, null, photosLoaderCallbacks).onContentChanged();
     }
-
-    @Nullable
-    @Override
-    public String getPath(Context context, Uri uri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = null;
-        try {
-            cursor = context.getContentResolver().query(uri, projection, null, null, null);
-            if (cursor == null)
-                return null;
-            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            if (!cursor.moveToFirst())
-                return null;
-            return cursor.getString(columnIndex);
-        } finally {
-            if (cursor != null)
-                cursor.close();
-        }
-    }
-
-
 }

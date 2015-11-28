@@ -14,4 +14,8 @@
     <string name="photo_filters_title">Photo filters</string>
     <string name="photo_edit_title">Edit photo</string>
     <string name="filters">Filters:</string>
+
+    <!-- Gallery Activity -->
+
+    <string name="gallery_title">Gallery</string>
 </resources>
